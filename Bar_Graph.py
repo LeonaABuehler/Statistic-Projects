@@ -1,37 +1,25 @@
 import numpy as np
 import matplotlib.pyplot as plt 
 from matplotlib.ticker import MaxNLocator
+ 
 
-def dotplot(input_x, **args):
- 
-    # Count how many times does each value occur
-    unique_values, counts = np.unique(input_x, return_counts=True)
-    
-    # Convert 1D input into 2D array
-    scatter_x = [] # x values 
-    scatter_y = [] # corresponding y values
-    for idx, value in enumerate(unique_values):
-        for counter in range(1, counts[idx]+1):
-            scatter_x.append(value)
-            scatter_y.append(counter)
- 
-    # draw dot plot using scatter() 
-    plt.scatter(scatter_x, scatter_y, **args)
-    
-    # Optional - show all unique values on x-axis. 
-    # Matplotlib might hide some of them  
-    plt.gca().set_xticks(unique_values)
+# creating the dataset
+data={'1 to 3':6, '4 to 6':15, '7 to 9':10, '10 to 12':7, '13 t0 15':3, '16 to 18':3, 
+        '19 to 20':3,   }
+courses = list(data.keys())
+values = list(data.values())
+  
+fig = plt.figure(figsize = (10, 5))
 
-hs_heights = np.array([
-    2,2,2,2,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,6,6,7,7,7,7,8,8,8,8,8,9,10,10,10,10,10,11,11,14,15,15,16,17,18,20,20
-])
-plt.figure(figsize=(10, 6), dpi=150)
+ax = fig.gca()
+ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+
  
-dotplot(input_x=hs_heights, marker='*', color='#C44E52', s=100)
+# creating the bar plot
+plt.bar(courses, values, color ='maroon', 
+        width = 0.4)
  
-plt.xlabel("", fontsize=14, labelpad=15)
-plt.ylabel("", fontsize=14, labelpad=15)
-plt.title("How many Shoes do you have?", fontsize=14, pad=15)
-plt.show()
-dotplot(input_x=hs_heights)
+plt.xlabel("")
+plt.ylabel("")
+plt.title("How many shoes do you have?")
 plt.show()
